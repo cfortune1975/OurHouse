@@ -1,15 +1,15 @@
 package main;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.sql.*;
 
 public class OurHouseEmployees {
 
 	private Employee employee = new Employee();
 	private JFrame frmMain;
+	private JLabel lblEmployee;
+	private JLabel lblNameFirst;
 	private JTextField txtFirstName;
 	private JTextField txtMiddleName;
 	private JTextField textField;
@@ -18,6 +18,10 @@ public class OurHouseEmployees {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe");
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -41,17 +45,18 @@ public class OurHouseEmployees {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frmMain = new JFrame();
-		frmMain.setTitle("Our House - New Employee");
+		frmMain.setTitle("Our House - Search Employee");
 		frmMain.setBounds(100, 100, 450, 300);
 		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMain.getContentPane().setLayout(null);
 
-		JLabel lblEmployee = new JLabel("Employee Number:");
+		lblEmployee = new JLabel("Employee Number:");
 		lblEmployee.setBounds(10, 11, 97, 14);
 		frmMain.getContentPane().add(lblEmployee);
 
-		JLabel lblNameFirst = new JLabel("First                           Middle  Last");
+		lblNameFirst = new JLabel("First                           Middle  Last");
 		lblNameFirst.setBounds(10, 64, 209, 14);
 		frmMain.getContentPane().add(lblNameFirst);
 
