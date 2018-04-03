@@ -226,10 +226,7 @@ public class OurHouseEmployees {
 				count++;
 			}
 			
-<<<<<<< HEAD
-=======
 			conn.close();
->>>>>>> branch 'master' of https://github.com/cxf140730/OurHouse.git
 		} 
 		catch (Exception ex) 
 		{
