@@ -64,27 +64,27 @@ public class Employee {
 		this.emp_Number = value;
 	}
 
-	public String getFirstName() {
+	public String getEmployeeFirstName() {
 		return this.emp_FName;
 	}
 
-	public String getLastName() {
+	public String getEmployeeLastName() {
 		return this.emp_LName;
 	}
 
-	public String getMiddleName() {
+	public String getEmployeeMiddleName() {
 		return this.emp_MName;
 	}
 
-	public void setFirstName(String value) {
+	public void setEmployeeFirstName(String value) {
 		this.emp_FName = value;
 	}
 
-	public void setMiddleName(String value) {
+	public void setEmployeeMiddleName(String value) {
 		this.emp_MName = value;
 	}
 
-	public void setLastName(String value) {
+	public void setEmployeeLastName(String value) {
 		this.emp_LName = value;
 	}
 
@@ -100,7 +100,7 @@ public class Employee {
 		return this.emp_PhoneNumber;
 	}
 
-	public void getEmployeePhoneNumber(String value) {
+	public void setEmployeePhoneNumber(String value) {
 		this.emp_PhoneNumber = value;
 	}
 
