@@ -25,14 +25,18 @@ public class OurHouseEmployees {
 	private JLabel lblBracketClose;
 	private JLabel lblPhoneNumber;
 	private JLabel lblAddress;
+	private JLabel lblAddressStreetNum;
 	
 	private JTextField txtNameFirst;
 	private JTextField txtNameMiddle;
 	private JTextField txtNameLast;
 	private JTextField txtPhoneArea;
 	private JTextField txtPhoneNumber;
+	private JTextField txtAddressStreetNum;
+	private JTextField txtAddressStreetName;
 	
-	
+	private JSeparator separator1;
+	private JSeparator separator2;
 
 	/** Launch the application. */
 	public static void main(String[] args) {
@@ -48,7 +52,7 @@ public class OurHouseEmployees {
 			}
 		});
 
-		// conn.close();
+		
 	}
 
 	/**
@@ -68,7 +72,7 @@ public class OurHouseEmployees {
 		frmMain.setResizable(false);
 		frmMain.getContentPane().setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
 		frmMain.setTitle("Our House - Add Employee");
-		frmMain.setBounds(100, 100, 439, 447);
+		frmMain.setBounds(100, 100, 439, 397);
 		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMain.getContentPane().setLayout(null);
 
@@ -77,6 +81,10 @@ public class OurHouseEmployees {
 		lblEmployeeNumber.setBounds(10, 11, 142, 20);
 		frmMain.getContentPane().add(lblEmployeeNumber);
 
+		separator1 = new JSeparator();
+		separator1.setBounds(10, 33, 170, 2);
+		frmMain.getContentPane().add(separator1);
+		
 		lblNameFirst = new JLabel("First Name:");
 		lblNameFirst.setLabelFor(txtNameFirst);
 		lblNameFirst.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
@@ -126,7 +134,7 @@ public class OurHouseEmployees {
 		txtPhoneArea = new JTextField();
 		lblPhoneNumber.setLabelFor(txtPhoneArea);
 		txtPhoneArea.setFont(new Font("SansSerif", Font.PLAIN, 16));
-		txtPhoneArea.setColumns(10);
+		txtPhoneArea.setColumns(3);
 		txtPhoneArea.setBounds(18, 101, 32, 20);
 		frmMain.getContentPane().add(txtPhoneArea);
 		
@@ -137,7 +145,7 @@ public class OurHouseEmployees {
 		
 		txtPhoneNumber = new JTextField();
 		txtPhoneNumber.setFont(new Font("SansSerif", Font.PLAIN, 16));
-		txtPhoneNumber.setColumns(10);
+		txtPhoneNumber.setColumns(8);
 		txtPhoneNumber.setBounds(62, 101, 60, 20);
 		frmMain.getContentPane().add(txtPhoneNumber);
 		
@@ -145,6 +153,27 @@ public class OurHouseEmployees {
 		lblAddress.setFont(new Font("SansSerif", Font.PLAIN, 16));
 		lblAddress.setBounds(10, 155, 142, 20);
 		frmMain.getContentPane().add(lblAddress);
+		
+		txtAddressStreetNum = new JTextField();
+		txtAddressStreetNum.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		txtAddressStreetNum.setColumns(5);
+		txtAddressStreetNum.setBounds(10, 182, 56, 20);
+		frmMain.getContentPane().add(txtAddressStreetNum);
+		
+		lblAddressStreetNum = new JLabel("Street Number & Name:");
+		lblAddressStreetNum.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		lblAddressStreetNum.setBounds(10, 201, 170, 20);
+		frmMain.getContentPane().add(lblAddressStreetNum);
+		
+		separator2 = new JSeparator();
+		separator2.setBounds(10, 176, 200, 2);
+		frmMain.getContentPane().add(separator2);
+		
+		txtAddressStreetName = new JTextField();
+		txtAddressStreetName.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		txtAddressStreetName.setColumns(10);
+		txtAddressStreetName.setBounds(66, 182, 200, 20);
+		frmMain.getContentPane().add(txtAddressStreetName);
 	}
 
 	private static int LoadEmployeeDB() 
@@ -192,6 +221,8 @@ public class OurHouseEmployees {
 				
 				count++;
 			}
+			
+			conn.close();
 		} 
 		catch (Exception ex) 
 		{
