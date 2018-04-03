@@ -150,6 +150,7 @@ public class OurHouseEmployees {
 	private static int LoadEmployeeDB() 
 	{
 		int count = 0;
+		int total = 0;
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -158,40 +159,44 @@ public class OurHouseEmployees {
 			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "system");
 			System.out.println("Database connection opened.");
 
-			Statement st = conn.createStatement();
-			System.out.println("Statement created.");
-
-			ResultSet rs = st.executeQuery("Select count(EMPLOYEE_NUMBER) FROM emp_name");
-			int total = rs.getInt(0);
-			
+			// Count total employees from database
+			PreparedStatement prepSt = conn.prepareStatement("Select count(EMPLOYEE_NUMBER) FROM cxf140730.emp_name");
+			ResultSet rs = prepSt.executeQuery();
+			while (rs.next()) {
+				total = rs.getInt(1);
+			}
 			System.out.println("total employee records: " + total);
 			
-			conn.createStatement();
+			// Read employee information from database
+			Statement st = conn.createStatement();
+			System.out.println("Statement created.");
+			
 			String Sql = "SELECT en.EMPLOYEE_NUMBER, LAST_NAME, FIRST_NAME, MIDDLE_NAME, "
 					+ "		  EMP_PHONE_AREA, EMP_PHONE_NUMBER, EMP_ADDRESS_STNUM, "
 					+ "		  EMP_ADDRESS_STNAME, EMP_ADDRESS_CITY, EMP_ADDRESS_STATE, " + "		  EMP_ADDRESS_ZIP"
-					+ "FROM emp_name en, emp_phone ep, emp_Address ea "
+					+ "FROM cxf140730.emp_name en, cxf140730.emp_phone ep, cxf140730.emp_Address ea "
 					+ "WHERE en.EMPLOYEE_NUMBER = ep.EMPLOYEE_NUMBER AND " + "en.EMPLOYEE_NUMBER = ea.EMPLOYEE_NUMBER";
-
 			rs = st.executeQuery(Sql);
+			System.out.println("Query executed.");
+			
 			Employee[] employee = new Employee[total + 1];
-
 			while (rs.next()) 
 			{
-				employee[count].setEmployeeNumber(rs.getInt(0));
-				employee[count].setEmployeeLastName(rs.getString(1));
-				employee[count].setEmployeeFirstName(rs.getString(2));
-				employee[count].setEmployeeMiddleName(rs.getString(3));
-				employee[count].setEmployeePhoneArea(rs.getString(4));
-				employee[count].setEmployeePhoneNumber(rs.getString(5));
-				employee[count].setEmployeeAddressStNum(rs.getInt(6));
-				employee[count].setEmployeeAddressStName(rs.getString(7));
-				employee[count].setEmployeeAddressCity(rs.getString(8));
-				employee[count].setEmployeeAddressState(rs.getString(9));
-				employee[count].setEmployeeAddressZip(rs.getInt(10));
+				employee[count].setEmployeeNumber(rs.getInt(1));
+				employee[count].setEmployeeLastName(rs.getString(2));
+				employee[count].setEmployeeFirstName(rs.getString(3));
+				employee[count].setEmployeeMiddleName(rs.getString(4));
+				employee[count].setEmployeePhoneArea(rs.getString(5));
+				employee[count].setEmployeePhoneNumber(rs.getString(6));
+				employee[count].setEmployeeAddressStNum(rs.getInt(7));
+				employee[count].setEmployeeAddressStName(rs.getString(8));
+				employee[count].setEmployeeAddressCity(rs.getString(9));
+				employee[count].setEmployeeAddressState(rs.getString(10));
+				employee[count].setEmployeeAddressZip(rs.getInt(11));
 				
 				count++;
 			}
+			
 		} 
 		catch (Exception ex) 
 		{
