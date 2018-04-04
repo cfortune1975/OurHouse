@@ -37,6 +37,9 @@ public class OurHouseEmployees {
 	
 	private JSeparator separator1;
 	private JSeparator separator2;
+	private JTextField txtAddressCity;
+	private JTextField txtAddressState;
+	private JTextField txtAddressZip;
 
 	/** Launch the application. */
 	public static void main(String[] args) {
@@ -72,7 +75,7 @@ public class OurHouseEmployees {
 		frmMain.setResizable(false);
 		frmMain.getContentPane().setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
 		frmMain.setTitle("Our House - Add Employee");
-		frmMain.setBounds(100, 100, 439, 397);
+		frmMain.setBounds(100, 100, 439, 354);
 		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMain.getContentPane().setLayout(null);
 
@@ -157,12 +160,12 @@ public class OurHouseEmployees {
 		txtAddressStreetNum = new JTextField();
 		txtAddressStreetNum.setFont(new Font("SansSerif", Font.PLAIN, 16));
 		txtAddressStreetNum.setColumns(5);
-		txtAddressStreetNum.setBounds(10, 182, 56, 20);
+		txtAddressStreetNum.setBounds(10, 191, 56, 20);
 		frmMain.getContentPane().add(txtAddressStreetNum);
 		
 		lblAddressStreetNum = new JLabel("Street Number & Name:");
 		lblAddressStreetNum.setFont(new Font("SansSerif", Font.PLAIN, 16));
-		lblAddressStreetNum.setBounds(10, 201, 170, 20);
+		lblAddressStreetNum.setBounds(10, 210, 170, 20);
 		frmMain.getContentPane().add(lblAddressStreetNum);
 		
 		separator2 = new JSeparator();
@@ -172,8 +175,35 @@ public class OurHouseEmployees {
 		txtAddressStreetName = new JTextField();
 		txtAddressStreetName.setFont(new Font("SansSerif", Font.PLAIN, 16));
 		txtAddressStreetName.setColumns(10);
-		txtAddressStreetName.setBounds(66, 182, 200, 20);
+		txtAddressStreetName.setBounds(66, 191, 200, 20);
 		frmMain.getContentPane().add(txtAddressStreetName);
+		
+		JLabel lblAddressCity = new JLabel("City:");
+		lblAddressCity.setBounds(10, 268, 42, 20);
+		frmMain.getContentPane().add(lblAddressCity);
+		
+		txtAddressCity = new JTextField();
+		txtAddressCity.setBounds(10, 243, 170, 26);
+		frmMain.getContentPane().add(txtAddressCity);
+		txtAddressCity.setColumns(20);
+		
+		txtAddressState = new JTextField();
+		txtAddressState.setColumns(2);
+		txtAddressState.setBounds(193, 243, 56, 26);
+		frmMain.getContentPane().add(txtAddressState);
+		
+		JLabel lblAddressState = new JLabel("State:");
+		lblAddressState.setBounds(193, 268, 42, 20);
+		frmMain.getContentPane().add(lblAddressState);
+		
+		txtAddressZip = new JTextField();
+		txtAddressZip.setColumns(5);
+		txtAddressZip.setBounds(258, 243, 146, 26);
+		frmMain.getContentPane().add(txtAddressZip);
+		
+		JLabel lblAddressZip = new JLabel("Zip Code:");
+		lblAddressZip.setBounds(258, 268, 69, 20);
+		frmMain.getContentPane().add(lblAddressZip);
 	}
 
 	private static int LoadEmployeeDB() 
