@@ -68,24 +68,27 @@ public class Employee {
 		return this.emp_FName;
 	}
 
+	public void setEmployeeFirstName(String value) {
+		value = value.substring(0, Math.min(value.length(), 10));
+		this.emp_FName = value;
+	}
+
 	public String getEmployeeLastName() {
 		return this.emp_LName;
+	}
+
+	public void setEmployeeLastName(String value) {
+		value = value.substring(0, Math.min(value.length(), 20));
+		this.emp_LName = value;
 	}
 
 	public String getEmployeeMiddleName() {
 		return this.emp_MName;
 	}
 
-	public void setEmployeeFirstName(String value) {
-		this.emp_FName = value;
-	}
-
 	public void setEmployeeMiddleName(String value) {
+		value = value.substring(0, Math.min(value.length(), 2));
 		this.emp_MName = value;
-	}
-
-	public void setEmployeeLastName(String value) {
-		this.emp_LName = value;
 	}
 
 	public String getEmployeePhoneArea() {
@@ -93,6 +96,7 @@ public class Employee {
 	}
 
 	public void setEmployeePhoneArea(String value) {
+		value = value.substring(0, Math.min(value.length(), 3));
 		this.emp_PhoneArea = value;
 	}
 
@@ -101,6 +105,7 @@ public class Employee {
 	}
 
 	public void setEmployeePhoneNumber(String value) {
+		value = value.substring(0, Math.min(value.length(), 8));
 		this.emp_PhoneNumber = value;
 	}
 
@@ -109,6 +114,8 @@ public class Employee {
 	}
 
 	public void setEmployeeAddressStNum(int value) {
+		if (value > 99999)
+			value = 99999;
 		this.emp_AddressStNum = value;
 	}
 
@@ -117,6 +124,7 @@ public class Employee {
 	}
 
 	public void setEmployeeAddressStName(String value) {
+		value = value.substring(0, Math.min(value.length(), 20));
 		this.emp_AddressStName = value;
 	}
 
@@ -125,6 +133,7 @@ public class Employee {
 	}
 
 	public void setEmployeeAddressCity(String value) {
+		value = value.substring(0, Math.min(value.length(), 20));
 		this.emp_AddressCity = value;
 	}
 
@@ -133,6 +142,7 @@ public class Employee {
 	}
 
 	public void setEmployeeAddressState(String value) {
+		value = value.substring(0, Math.min(value.length(), 2));
 		this.emp_AddressState = value;
 	}
 
@@ -141,6 +151,8 @@ public class Employee {
 	}
 
 	public void setEmployeeAddressZip(int value) {
+		if (value > 99999)
+			value = 99999;
 		this.emp_AddressZip = value;
 	}
 
