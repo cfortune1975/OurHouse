@@ -84,9 +84,11 @@ public class OurHouseEmployees {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
 				try {
-					int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to Quit?", "Quit", JOptionPane.YES_NO_OPTION);
-					if (result == JOptionPane.YES_OPTION) System.exit(0);
-					
+					int result = JOptionPane.showConfirmDialog(frmAddEmployee, "Are you sure you want to Quit?", "Quit",
+							JOptionPane.YES_NO_OPTION);
+					if (result == JOptionPane.YES_OPTION)
+						System.exit(0);
+
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
@@ -173,7 +175,6 @@ public class OurHouseEmployees {
 		lblBracketClose.setLabelFor(txtPhoneNumber);
 		frmAddEmployee.getContentPane().add(lblBracketClose);
 
-		// txtPhoneNumber = new JTextField();
 		mask = createFormatter("###-####", ' ');
 		txtPhoneNumber = new JFormattedTextField(mask);
 		txtPhoneNumber.setFont(new Font("SansSerif", Font.PLAIN, 16));
@@ -266,9 +267,11 @@ public class OurHouseEmployees {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				try {
-					int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to cancel?", "Cancel", JOptionPane.YES_NO_OPTION);
-					if (result == JOptionPane.YES_OPTION) System.exit(0);
-					
+					int result = JOptionPane.showConfirmDialog(frmAddEmployee, "Are you sure you want to cancel?",
+							"Cancel", JOptionPane.YES_NO_OPTION);
+					if (result == JOptionPane.YES_OPTION)
+						System.exit(0);
+
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
@@ -327,15 +330,15 @@ public class OurHouseEmployees {
 		int intZip = Integer.parseInt(txtAddressZip.getText());
 
 		// Create employee object
-		// Employee anEmp = new Employee(empNum, strNameFirst, strNameLast);
-		// anEmp.setEmployeeMiddleName(strNameMiddle);
-		// anEmp.setEmployeePhoneArea(strArea);
-		// anEmp.setEmployeePhoneNumber(strPhone);
-		// anEmp.setEmployeeAddressStNum(intStreetNum);
-		// anEmp.setEmployeeAddressStName(strStreetName);
-		// anEmp.setEmployeeAddressCity(strCity);
-		// anEmp.setEmployeeAddressState(strState);
-		// anEmp.setEmployeeAddressZip(intZip);
+		Employee anEmp = new Employee(empNum, strFName, strLName);
+		anEmp.setEmployeeMiddleName(strMName);
+		anEmp.setEmployeePhoneArea(strArea);
+		anEmp.setEmployeePhoneNumber(strPhone);
+		anEmp.setEmployeeAddressStNum(intStNum);
+		anEmp.setEmployeeAddressStName(strStName);
+		anEmp.setEmployeeAddressCity(strCity);
+		anEmp.setEmployeeAddressState(strState);
+		anEmp.setEmployeeAddressZip(intZip);
 
 		try {
 			// Write data to database
@@ -357,10 +360,8 @@ public class OurHouseEmployees {
 			cSt.setString(10, strState);
 			cSt.setInt(11, intZip);
 
-			boolean results = cSt.execute();
-			// while (results) {
-			//
-			// }
+			conn.close();
+			cSt.close();
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -489,6 +490,7 @@ public class OurHouseEmployees {
 		// For txtPhoneArea, also need to verify the entered value is a valid
 		// numeric
 		try {
+			@SuppressWarnings("unused")
 			long tempPA = Long.parseLong(txtPhoneArea.getText());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(frmAddEmployee, "Area Code must have a Numeric Value.");
@@ -561,6 +563,7 @@ public class OurHouseEmployees {
 		// For txtAddressStreetNum, also need to verify the entered value is a valid
 		// numeric
 		try {
+			@SuppressWarnings("unused")
 			long tempSN = Long.parseLong(txtAddressStreetNum.getText());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(frmAddEmployee, "Street Number must have a Numeric Value.");
@@ -720,6 +723,7 @@ public class OurHouseEmployees {
 		// For txtAddressZip, also need to verify the entered value is a valid
 		// numeric
 		try {
+			@SuppressWarnings("unused")
 			long tempZC = Long.parseLong(txtAddressZip.getText());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(frmAddEmployee, "Zip Code must have a Numeric Value.");
