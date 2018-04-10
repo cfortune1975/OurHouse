@@ -71,14 +71,14 @@ public class OurHouseSearchDB {
 		scrollPane.setBounds(10, 10, 424, 292);
 		frmSearchDB.getContentPane().add(scrollPane);
 		
-		int employees = LoadEmployeeDB();
+		LoadEmployeeDB();
 
 		String[] columnNames = { 
 				"Employee Number", "First Name", "MI", "Last Name", "Phone Number", "Street", "City", "State", "Zip Code" 
 				};
-		Object[][] data = new Object[employees][10];
+		Object[][] data = new Object[employee.length][10];
 		
-		for (int i = 1; i<= employees; i++)
+		for (int i = 1; i <= employee.length; i++)
 		{
 			data[i][1] = employee[i].getEmployeeNumber();
 			data[i][2] = employee[i].getEmployeeFirstName();
@@ -97,7 +97,7 @@ public class OurHouseSearchDB {
 
 	} // end of method initialize
 
-	private static int LoadEmployeeDB() {
+	private static void LoadEmployeeDB() {
 		int count = 0;
 		int total = 0;
 
@@ -117,15 +117,11 @@ public class OurHouseSearchDB {
 			System.out.println("total employee records: " + total);
 
 			// Read employee information from database
-			String sql = "SELECT en.EMPLOYEE_NUMBER, LAST_NAME, FIRST_NAME, MIDDLE_NAME,"
-					+ " EMP_PHONE_AREA, EMP_PHONE_NUMBER, EMP_ADDRESS_STNUM, "
-					+ " EMP_ADDRESS_STNAME, EMP_ADDRESS_CITY, EMP_ADDRESS_STATE, " 
-					+ " EMP_ADDRESS_ZIP"
-					+ "FROM dbo.emp_name en, dbo.emp_phone ep, dbo.emp_Address ea "
-					+ "WHERE en.EMPLOYEE_NUMBER = ep.EMPLOYEE_NUMBER AND "
-					+ " en.EMPLOYEE_NUMBER = ea.EMPLOYEE_NUMBER";
+			String sql = "select EMPLOYEE, LAST_NAME, FIRST_NAME, MIDDLE_NAME, " + 
+					"EMP_PHONE_AREA, EMP_PHONE_NUMBER, " + 
+					"EMP_ADDRESS_STNUM, EMP_ADDRESS_STNAME, CITY, STATE, ZIP " + 
+					"from dbo.vw_all_employees";
 
-			//String sql = "{call dbo.sp_emp_get}";
 			prepSt = conn.prepareStatement(sql);
 			System.out.println("Statement created.");
 
@@ -133,10 +129,18 @@ public class OurHouseSearchDB {
 			System.out.println("Query executed.");
 
 			Employee[] employee = new Employee[total + 1];
+			
+			for (int i = 0; i< employee.length; i++)
+				employee[i] = new Employee();
+			
 			while (rs.next()) {
+				
+				
 				employee[count].setEmployeeNumber(rs.getInt(1));
 				employee[count].setEmployeeLastName(rs.getString(2));
 				employee[count].setEmployeeFirstName(rs.getString(3));
+				
+				
 				employee[count].setEmployeeMiddleName(rs.getString(4));
 				employee[count].setEmployeePhoneArea(rs.getString(5));
 				employee[count].setEmployeePhoneNumber(rs.getString(6));
@@ -153,11 +157,12 @@ public class OurHouseSearchDB {
 			rs.close();
 			prepSt.close();
 			conn.close();
+			System.out.println("Connection closed.");
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
-		return count;
+//		return employee;
 	}
 }
