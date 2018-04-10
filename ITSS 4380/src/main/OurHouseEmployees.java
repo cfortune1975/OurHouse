@@ -8,8 +8,8 @@ import javax.swing.text.MaskFormatter;
 
 import java.sql.*;
 
-import org.apache.commons.lang3.Validate;
-//import main.Employee;
+import org.apache.commons.lang3.*;
+import main.Employee;
 
 /*
  * @author Alex Wubbena, Chad Fortune, Timothy Lee
@@ -99,7 +99,7 @@ public class OurHouseEmployees {
 		frmAddEmployee.setResizable(false);
 		frmAddEmployee.getContentPane().setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
 		frmAddEmployee.setTitle("Our House - Add Employee");
-		frmAddEmployee.setBounds(100, 100, 363, 385);
+		frmAddEmployee.setBounds(100, 100, 383, 409);
 		frmAddEmployee.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frmAddEmployee.getContentPane().setLayout(null);
 
@@ -362,6 +362,7 @@ public class OurHouseEmployees {
 
 			conn.close();
 			cSt.close();
+			System.out.println("Database connection closed.");
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -369,6 +370,17 @@ public class OurHouseEmployees {
 
 		JOptionPane.showMessageDialog(frmAddEmployee,
 				"The new employee has been successfully inserted into the database.");
+
+		txtNameFirst.setText("");
+		txtNameMiddle.setText("");
+		txtNameLast.setText("");
+		txtPhoneArea.setText("");
+		txtPhoneNumber.setText("");
+		txtAddressStreetNum.setText("");
+		txtAddressStreetName.setText("");
+		txtAddressCity.setText("");
+		txtAddressState.setText("");
+		txtAddressZip.setText("");
 
 	}
 
