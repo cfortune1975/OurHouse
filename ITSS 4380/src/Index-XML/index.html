@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+	<title>Our House Web Portal - Add Bin</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<div>Add Warehouse Bin</div>
+	<p></p>
+	<form name="addForm" method="post" action="LoginServlet">
+		Warehouse ID: <input type="text" name="warehouse_ID" /> <br />
+		Bin Number: <input type="number" name="bin_Number" /> <br />
+		Bin Capacity: <input type="number" name="bin_Capacity" /> <br />
+		<p></p>
+		<input type="submit" value="Add" />
+	</form>
+	<p></p>
+	<p>-------------------------------------------------------------</p>
+	<div>Show Warehouse Bin Values</div>
+	<p></p>
+	<form name="viewForm" method="post" action="Fetch">
+		Warehouse ID: <input type="text" name="warehouse_ID" /> <br />
+		<p></p>
+		<input type="submit" value="View" />
+	</form>
+</body>
+</html>
