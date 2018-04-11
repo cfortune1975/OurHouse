@@ -251,6 +251,7 @@ public class OurHouseEmployees {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					btnAdd_Click();
+					txtNameFirst.transferFocus();
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
@@ -345,7 +346,7 @@ public class OurHouseEmployees {
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "system");
 			System.out.println("Database connection opened.");
 
-			String sql = "{call dbo.SP_ADD_EMPLOYEE" + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+			String sql = "{call dbo.SP_EMP_ADD" + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
 			CallableStatement cSt = conn.prepareCall(sql);
 			cSt.setInt(1, empNum);
@@ -359,6 +360,9 @@ public class OurHouseEmployees {
 			cSt.setString(9, strCity);
 			cSt.setString(10, strState);
 			cSt.setInt(11, intZip);
+			
+			boolean execute = cSt.execute();
+			System.out.println(execute);
 
 			conn.close();
 			cSt.close();

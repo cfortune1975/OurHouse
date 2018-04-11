@@ -7,8 +7,7 @@ import javax.swing.*;
 import java.sql.*;
 import main.Employee;
 //import javax.swing.table.DefaultTableModel;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.event.*;
 
 /*
  * @author Alex Wubbena, Chad Fortune, Timothy Lee
@@ -17,7 +16,7 @@ import java.awt.event.ComponentEvent;
 
 public class OurHouseSearchDB {
 	private static Connection conn = null;
-	private static Employee[] employee;
+	private Employee[] employee = null;
 
 	private JFrame frmSearchDB;
 	private JTable tblEmployee;
@@ -71,7 +70,7 @@ public class OurHouseSearchDB {
 		scrollPane.setBounds(10, 10, 424, 292);
 		frmSearchDB.getContentPane().add(scrollPane);
 		
-		Employee[] employee = LoadEmployeeDB();
+		this.employee = LoadEmployeeDB();
 
 		String[] columnNames = { 
 				"Employee Number", "First Name", "MI", "Last Name", "Phone Number", "Street", "City", "State", "Zip Code" 
@@ -97,10 +96,7 @@ public class OurHouseSearchDB {
 
 	} // end of method initialize
 
-	private static Employee[] LoadEmployeeDB() {
-		int count = 0;
-		int total = 0;
-
+	private Employee[] LoadEmployeeDB() {
 		Employee[] employee = null;
 		
 		try {
@@ -113,6 +109,8 @@ public class OurHouseSearchDB {
 			// Count total employees from database
 			PreparedStatement prepSt = conn.prepareStatement("Select count(EMPLOYEE_NUMBER) FROM dbo.emp_name");
 			ResultSet rs = prepSt.executeQuery();
+
+			int total = 0;
 			while (rs.next()) {
 				total = rs.getInt(1);
 			}
@@ -130,13 +128,14 @@ public class OurHouseSearchDB {
 			rs = prepSt.executeQuery();
 			System.out.println("Query executed.");
 
-			employee = new Employee[total + 1];
+			employee = new Employee[total];
 			
 			for (int i = 0; i< employee.length; i++)
 				employee[i] = new Employee();
 			
-			while (rs.next()) {
-				
+			int count = 0;
+
+			while (rs.next()) {				
 				employee[count].setEmployeeNumber(rs.getInt(1));
 				employee[count].setEmployeeLastName(rs.getString(2));
 				employee[count].setEmployeeFirstName(rs.getString(3));
