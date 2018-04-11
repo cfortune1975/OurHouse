@@ -71,24 +71,24 @@ public class OurHouseSearchDB {
 		scrollPane.setBounds(10, 10, 424, 292);
 		frmSearchDB.getContentPane().add(scrollPane);
 		
-		employee = LoadEmployeeDB();
+		Employee[] employee = LoadEmployeeDB();
 
 		String[] columnNames = { 
 				"Employee Number", "First Name", "MI", "Last Name", "Phone Number", "Street", "City", "State", "Zip Code" 
 				};
 		Object[][] data = new Object[employee.length][9];
 		
-		for (int i = 1; i <= employee.length; i++)
+		for (int i = 0; i < employee.length; i++)
 		{
-			data[i][1] = employee[i].getEmployeeNumber();
-			data[i][2] = employee[i].getEmployeeFirstName();
-			data[i][3] = employee[i].getEmployeeMiddleName();
-			data[i][4] = employee[i].getEmployeeLastName();
-			data[i][5] = employee[i].getEmployeePhoneArea() + " " + employee[i].getEmployeePhoneNumber();
-			data[i][6] = employee[i].getEmployeeAddressStreetNUm() + " " + employee[i].getEmployeeAddressStName();
-			data[i][7] = employee[i].getEmployeeAddressCity();
-			data[i][8] = employee[i].getEmployeeAddressState();
-			data[i][9] = employee[i].getEmployeeAddressZip();
+			data[i][0] = employee[i].getEmployeeNumber();
+			data[i][1] = employee[i].getEmployeeFirstName();
+			data[i][2] = employee[i].getEmployeeMiddleName();
+			data[i][3] = employee[i].getEmployeeLastName();
+			data[i][4] = employee[i].getEmployeePhoneArea() + " " + employee[i].getEmployeePhoneNumber();
+			data[i][5] = employee[i].getEmployeeAddressStreetNUm() + " " + employee[i].getEmployeeAddressStName();
+			data[i][6] = employee[i].getEmployeeAddressCity();
+			data[i][7] = employee[i].getEmployeeAddressState();
+			data[i][8] = employee[i].getEmployeeAddressZip();
 		}
 
 		tblEmployee = new JTable(data, columnNames);
@@ -101,6 +101,8 @@ public class OurHouseSearchDB {
 		int count = 0;
 		int total = 0;
 
+		Employee[] employee = null;
+		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			System.out.println("jdbc driver loaded.");
@@ -128,13 +130,12 @@ public class OurHouseSearchDB {
 			rs = prepSt.executeQuery();
 			System.out.println("Query executed.");
 
-			Employee[] employee = new Employee[total + 1];
+			employee = new Employee[total + 1];
 			
 			for (int i = 0; i< employee.length; i++)
 				employee[i] = new Employee();
 			
 			while (rs.next()) {
-				
 				
 				employee[count].setEmployeeNumber(rs.getInt(1));
 				employee[count].setEmployeeLastName(rs.getString(2));
@@ -142,6 +143,8 @@ public class OurHouseSearchDB {
 				
 				if (rs.getString(4) != null)
 					employee[count].setEmployeeMiddleName(rs.getString(4));
+				else
+					employee[count].setEmployeeMiddleName(" ");
 				
 				employee[count].setEmployeePhoneArea(rs.getString(5));
 				employee[count].setEmployeePhoneNumber(rs.getString(6));
