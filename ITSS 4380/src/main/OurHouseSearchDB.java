@@ -17,7 +17,7 @@ import java.awt.event.ComponentEvent;
 
 public class OurHouseSearchDB {
 	private static Connection conn = null;
-	private static Employee[] employee = null;
+	private static Employee[] employee;
 
 	private JFrame frmSearchDB;
 	private JTable tblEmployee;
@@ -71,12 +71,12 @@ public class OurHouseSearchDB {
 		scrollPane.setBounds(10, 10, 424, 292);
 		frmSearchDB.getContentPane().add(scrollPane);
 		
-		LoadEmployeeDB();
+		employee = LoadEmployeeDB();
 
 		String[] columnNames = { 
 				"Employee Number", "First Name", "MI", "Last Name", "Phone Number", "Street", "City", "State", "Zip Code" 
 				};
-		Object[][] data = new Object[employee.length][10];
+		Object[][] data = new Object[employee.length][9];
 		
 		for (int i = 1; i <= employee.length; i++)
 		{
@@ -97,7 +97,7 @@ public class OurHouseSearchDB {
 
 	} // end of method initialize
 
-	private static void LoadEmployeeDB() {
+	private static Employee[] LoadEmployeeDB() {
 		int count = 0;
 		int total = 0;
 
@@ -140,8 +140,9 @@ public class OurHouseSearchDB {
 				employee[count].setEmployeeLastName(rs.getString(2));
 				employee[count].setEmployeeFirstName(rs.getString(3));
 				
+				if (rs.getString(4) != null)
+					employee[count].setEmployeeMiddleName(rs.getString(4));
 				
-				employee[count].setEmployeeMiddleName(rs.getString(4));
 				employee[count].setEmployeePhoneArea(rs.getString(5));
 				employee[count].setEmployeePhoneNumber(rs.getString(6));
 				employee[count].setEmployeeAddressStNum(rs.getInt(7));
@@ -153,7 +154,6 @@ public class OurHouseSearchDB {
 				count++;
 			}
 
-			
 			rs.close();
 			prepSt.close();
 			conn.close();
@@ -163,6 +163,6 @@ public class OurHouseSearchDB {
 			ex.printStackTrace();
 		}
 
-//		return employee;
+		return employee;
 	}
 }
